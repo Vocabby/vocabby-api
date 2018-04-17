@@ -1,0 +1,19 @@
+scalar JSON
+
+type Vocab {
+  id: String!
+  title: String!
+  group: String
+  previewUrl: String
+  mediaUrl: String
+  slug: String!
+  content: JSON
+  contentTranslated: JSON
+  wordCount: Int!
+  words: [Word]
+}
+
+extend type Query {
+  vocabs: [Vocab]
+  vocabBySlug(slug: String!): Vocab
+}

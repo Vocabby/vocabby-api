@@ -1,0 +1,11 @@
+type Word {
+  id: String!
+  title: String!
+  definition: String!
+  article: String
+  audioUrl: String
+}
+
+extend type Query {
+  randomWords(count: Int = 3): [Word]
+}
