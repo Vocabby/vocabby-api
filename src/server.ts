@@ -1,4 +1,5 @@
 /* tslint:disable: no-console */
+import * as cors from 'kcors'
 import * as Koa from 'koa'
 import * as koabody from 'koa-body'
 import * as compress from 'koa-compress'
@@ -18,6 +19,7 @@ router.post('/graphql', graphql)
 app.use(helmet())
 app.use(compress())
 app.use(logger())
+app.use(cors())
 app.use(koabody())
 
 app.use(router.routes())
