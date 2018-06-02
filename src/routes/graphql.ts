@@ -6,7 +6,7 @@ import schema from '../graphql/schema'
 import { IAppContext } from '../types'
 
 export default (router: Router) => {
-  router.get('/graphql', graphqlKoa((ctx: IAppContext) => {
+  router.post('/graphql', graphqlKoa((ctx: IAppContext) => {
     return {
       schema,
       debug: true,
