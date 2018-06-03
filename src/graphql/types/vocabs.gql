@@ -11,6 +11,7 @@ type Vocab {
   contentTranslated: JSON
   wordCount: Int!
   words: [Word]
+  studyItems: [StudyItem]
 }
 
 extend type Query {

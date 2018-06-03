@@ -1,6 +1,6 @@
 import { resourceUrl } from '../../helpers/url'
 import * as vocabService from '../../services/vocab'
-import { IAppContext, IVocab, IWord } from '../../types'
+import { IAppContext, IStudyItem, IUser, IVocab, IWord } from '../../types'
 
 const vocabMapper = (vocab: IVocab): IVocab => ({
   ...vocab,
@@ -29,6 +29,15 @@ export default {
     async words(vocab: IVocab, _: any, ctx: IAppContext) {
       const words = await ctx.loaders.words.loadMany(vocab.word_ids)
       return words.map(wordMapper)
+    },
+    async studyItems(vocab: IVocab, _: any, ctx: IAppContext) {
+      if (ctx.state.userId) {
+        const user: IUser = await ctx.loaders.users.load(ctx.state.userId)
+        if (user.esStudyItems) {
+          return user.esStudyItems.filter(studyItem => vocab.word_ids.includes(studyItem.wordId))
+        }
+      }
+      return [] as IStudyItem[]
     },
   },
 }

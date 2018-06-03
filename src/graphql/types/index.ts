@@ -3,6 +3,7 @@ import * as path from 'path'
 
 const paths = [
   'api.gql',
+  'studyItems.gql',
   'vocabs.gql',
   'users.gql',
   'words.gql',
