@@ -4,7 +4,7 @@ type Vocab {
   _id: String!
   title: String!
   group: String
-  previewUrl: String
+  previewUrl: ResourceUrl
   mediaUrl: String
   slug: String!
   content: JSON

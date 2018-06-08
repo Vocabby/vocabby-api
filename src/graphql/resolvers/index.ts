@@ -1,8 +1,9 @@
 import { IResolvers } from 'graphql-tools/dist/Interfaces'
 import { merge } from 'lodash'
 
+import resource from './resource'
 import users from './users'
 import vocabs from './vocabs'
 import words from './words'
 
-export default merge(vocabs, words, users) as IResolvers
+export default merge(vocabs, words, users, resource) as IResolvers
