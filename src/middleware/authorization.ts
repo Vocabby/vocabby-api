@@ -1,5 +1,4 @@
 import * as userConfig from '../config'
-import { UnauthorizedError } from '../errors'
 import { parseHeader } from '../helpers/bearer'
 import jwt from '../helpers/jwt'
 import log from '../logger'
@@ -14,24 +13,18 @@ async function verifyToken<TResult>(token: string, secret: string): Promise<TRes
     }
 }
 
-export const requireUser = async (ctx: IAppContext, middleware: IMiddleware) => {
+export default () => async (ctx: IAppContext, middleware: IMiddleware) => {
   const token = parseHeader(ctx.header.authorization)
-  if (!token) {
-    throw new UnauthorizedError()
+  if (token) {
+    const decoded = await verifyToken<IUserJWT>(token, userConfig.jwtOptions.secret)
+    if (decoded) {
+      const user = await userService.findById(decoded.userId)
+      if (user) {
+        ctx.state = ctx.state || {}
+        ctx.state.userId = user._id
+      }
+    }
   }
-
-  const decoded = await verifyToken<IUserJWT>(token, userConfig.jwtOptions.secret)
-  if (!decoded) {
-    throw new UnauthorizedError()
-  }
-
-  const user = await userService.findById(decoded.userId)
-  if (!user) {
-    throw new UnauthorizedError()
-  }
-
-  ctx.state = ctx.state || {}
-  ctx.state.userId = user._id
 
   await middleware()
 }

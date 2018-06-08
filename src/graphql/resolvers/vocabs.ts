@@ -34,7 +34,11 @@ export default {
       if (ctx.state.userId) {
         const user: IUser = await ctx.loaders.users.load(ctx.state.userId)
         if (user.esStudyItems) {
-          return user.esStudyItems.filter(studyItem => vocab.word_ids.includes(studyItem.wordId))
+          const vocabWords = vocab.word_ids.reduce(((map: any, value) => {
+            map[value] = true
+            return map
+          }), {})
+          return user.esStudyItems.filter(studyItem => vocabWords[studyItem.wordId])
         }
       }
       return [] as IStudyItem[]
