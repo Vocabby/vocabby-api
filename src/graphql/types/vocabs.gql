@@ -1,7 +1,7 @@
 scalar JSON
 
 type Vocab {
-  id: String!
+  _id: String!
   title: String!
   group: String
   previewUrl: String

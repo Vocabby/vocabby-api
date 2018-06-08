@@ -1,5 +1,5 @@
 type Word {
-  id: String!
+  _id: String!
   title: String!
   definition: String!
   article: String
