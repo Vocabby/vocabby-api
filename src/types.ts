@@ -67,7 +67,6 @@ export interface IUserJWT {
 
 export interface IVocab {
   _id: string,
-  id: string,
   title: string,
   group: string,
   preview: string,
@@ -83,7 +82,6 @@ export interface IVocab {
 
 export interface IWord {
   _id: string,
-  id: string,
   title: string,
   definition: string,
   article: string,

@@ -1,17 +1,11 @@
 import { resourceUrl } from '../../helpers/url'
 import * as vocabService from '../../services/vocab'
-import { IAppContext, IStudyItem, IUser, IVocab, IWord } from '../../types'
+import { IAppContext, IStudyItem, IUser, IVocab } from '../../types'
 
 const vocabMapper = (vocab: IVocab): IVocab => ({
   ...vocab,
-  id: vocab._id,
   previewUrl: resourceUrl(vocab.preview),
   wordCount: vocab.word_ids.length,
-})
-
-const wordMapper = (word: IWord): IWord => ({
-  ...word,
-  id: word._id,
 })
 
 export default {
@@ -28,7 +22,7 @@ export default {
   Vocab: {
     async words(vocab: IVocab, _: any, ctx: IAppContext) {
       const words = await ctx.loaders.words.loadMany(vocab.word_ids)
-      return words.map(wordMapper)
+      return words
     },
     async studyItems(vocab: IVocab, _: any, ctx: IAppContext) {
       if (ctx.state.userId) {
