@@ -10,6 +10,7 @@ type Vocab {
   content: JSON
   contentTranslated: JSON
   wordCount: Int!
+  isFavorite: Boolean
   words: [Word]
   studyItems: [StudyItem]
 }

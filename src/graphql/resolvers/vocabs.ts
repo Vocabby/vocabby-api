@@ -1,3 +1,4 @@
+import { toHash } from '../../helpers/array'
 import * as vocabService from '../../services/vocab'
 import { IAppContext, IStudyItem, IUser, IVocab } from '../../types'
 
@@ -21,11 +22,8 @@ export default {
       if (ctx.state.userId) {
         const user: IUser = await ctx.loaders.users.load(ctx.state.userId)
         if (user.esStudyItems) {
-          const vocabWords = vocab.word_ids.reduce(((map: any, value) => {
-            map[value] = true
-            return map
-          }), {})
-          return user.esStudyItems.filter(studyItem => vocabWords[studyItem.wordId])
+          const wordHash = toHash(vocab.word_ids)
+          return user.esStudyItems.filter(studyItem => wordHash[studyItem.wordId])
         }
       }
       return [] as IStudyItem[]
@@ -35,6 +33,15 @@ export default {
     },
     wordCount(vocab: IVocab) {
       return vocab.word_ids.length
+    },
+    async isFavorite(vocab: IVocab, _: any, ctx: IAppContext) {
+      if (ctx.state.userId) {
+        const user: IUser = await ctx.loaders.users.load(ctx.state.userId)
+        if (user.esFavoriteIds) {
+          return Boolean(toHash(user.esFavoriteIds)[vocab._id])
+        }
+      }
+      return false
     },
   },
 }
