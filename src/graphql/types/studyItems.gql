@@ -1,3 +1,4 @@
 type StudyItem {
   wordId: String!
+  word: Word!
 }
