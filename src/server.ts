@@ -4,6 +4,7 @@ import * as Koa from 'koa'
 import * as koabody from 'koa-body'
 import * as compress from 'koa-compress'
 import * as helmet from 'koa-helmet'
+import * as throng from 'throng'
 
 import * as config from './config'
 import authorization from './middleware/authorization'
@@ -21,5 +22,9 @@ app.use(koabody())
 
 app.use(router.routes())
 
-app.listen(config.httpPort)
-console.log(`🚀 Server is running on port ${config.httpPort}`)
+const startFunction = () => {
+  app.listen(config.httpPort)
+  console.log(`🚀 Server is running on port ${config.httpPort}`)
+}
+
+throng(startFunction)

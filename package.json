@@ -24,7 +24,9 @@
     "koa-router": "^7.4.0",
     "lodash": "^4.17.5",
     "mongodb": "^3.0.5",
+    "nodemon": "^1.18.4",
     "pino": "^4.15.4",
+    "throng": "^4.0.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
@@ -41,8 +43,8 @@
     "@types/lodash": "^4.14.107",
     "@types/mongodb": "^3.0.9",
     "@types/pino": "^4.7.1",
+    "@types/throng": "^4.0.2",
     "@types/uuid": "^3.4.3",
-    "nodemon": "^1.17.3",
     "ts-node": "^5.0.1",
     "tslint": "^5.9.1",
     "typescript": "^2.8.1"
