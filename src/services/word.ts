@@ -13,13 +13,32 @@ export async function randomByWordSet(setId: string, count: number): Promise<IWo
   return words
 }
 
+export async function random(count: number): Promise<IWord[]> {
+  const db = await client()
+  const collection = await db.collection('en_words')
+  const words = await collection.aggregate<IWord>([
+    { $sample : { size: count } },
+  ]).toArray()
+
+  return words
+}
+
 export async function findManyById(ids: string[]) {
   const db = await client()
   const collection = await db.collection('es_words')
-  const users = await collection.find<IWord>({
+  const words = await collection.find<IWord>({
     _id: {
         $in: ids.map(id => new ObjectId(id)),
     },
   }).toArray()
-  return users
+  return words
+}
+
+export async function findById(id: string) {
+  const db = await client()
+  const collection = await db.collection('es_words')
+  const word = await collection.findOne<IWord>({
+    _id: id,
+  })
+  return word
 }

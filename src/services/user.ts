@@ -1,10 +1,11 @@
 import { ObjectId } from 'bson'
 import * as config from '../config'
 import client from '../data'
-import { InvalidEmailPasswordError, UserConflictError } from '../errors'
+import { InvalidEmailPasswordError, NotFoundError, UserConflictError } from '../errors'
 import * as bcrypt from '../helpers/bcrypt'
 import jwt from '../helpers/jwt'
 import { ICredentials, INewUser, IUser, IUserJWT } from '../types'
+import * as wordService from './word'
 
 export async function login(data: ICredentials) {
   const db = await client()
@@ -79,4 +80,18 @@ export async function createSocial(props: INewUser) {
   const filter = { email: props.email }
   const result = await collection.findOneAndUpdate(filter, { $set: props }, { upsert: true })
   return result.value as IUser
+}
+
+export async function addStudyItem(wordId: string, user: IUser) {
+  const word = wordService.findById(wordId)
+  if (!word) {
+    throw new NotFoundError()
+  }
+
+  const studyItem = user.esStudyItems.find(item => item.wordId === wordId)
+  if (!studyItem) {
+    // study_item = current_user.es_study_items.create!(word: word, next_review_at: DateTime.now)
+  }
+
+  return studyItem
 }

@@ -2,3 +2,8 @@ type StudyItem {
   wordId: String!
   word: Word!
 }
+
+extend type Mutation {
+  addStudyItem(wordId: String!): Word
+  removeStudyItem(wordId: String!): Boolean
+}

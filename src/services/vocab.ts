@@ -2,14 +2,14 @@ import client from '../data'
 import { NotFoundError } from '../errors'
 import { IVocab } from '../types'
 
-export async function findAll(): Promise<IVocab[]> {
+export async function findAll() {
   const db = await client()
   const collection = await db.collection('es_vocabs')
   const vocabs = await collection.find<IVocab>({ published: true }).toArray()
   return vocabs
 }
 
-export async function findBySlug(slug: string): Promise<IVocab> {
+export async function findBySlug(slug: string) {
   const db = await client()
   const collection = await db.collection('es_vocabs')
 

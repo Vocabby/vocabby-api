@@ -11,8 +11,8 @@ type User {
 }
 
 extend type Mutation {
-    signIn(email: String!, password: String!): UserJWT
-    emailSignUp(email: String!, password: String!): UserJWT
-    facebookSignUp(token: String!): UserJWT
-    googleSignUp(token: String!): UserJWT
+  signIn(email: String!, password: String!): UserJWT
+  emailSignUp(email: String!, password: String!): UserJWT
+  facebookSignUp(token: String!): UserJWT
+  googleSignUp(token: String!): UserJWT
 }

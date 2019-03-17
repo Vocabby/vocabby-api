@@ -7,5 +7,5 @@ type Word {
 }
 
 extend type Query {
-  randomWords(count: Int = 3): [Word]
+  randomWords(count: Int = 3, fromSet: Boolean = true): [Word]
 }
