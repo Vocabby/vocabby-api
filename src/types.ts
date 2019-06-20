@@ -88,3 +88,20 @@ export interface IWord {
   audio: string,
   audioUrl: string,
 }
+
+export type TPos = 'noun' | 'adjective' | 'verb' | 'adverb'
+
+export interface IOppositeGroup {
+  pos: TPos
+  left: string[]
+  definition_left: string
+  right: string[]
+  definition_right: string
+}
+
+export interface IPhrasalVerb {
+  _id: string
+  title: string
+  definition: string
+  prepositions: string[]
+}

@@ -17,6 +17,7 @@ export async function random(count: number): Promise<IWord[]> {
   const db = await client()
   const collection = await db.collection('en_words')
   const words = await collection.aggregate<IWord>([
+    { $match: { backup: false, definition: { $nin: [null, ''] } } },
     { $sample : { size: count } },
   ]).toArray()
 

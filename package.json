@@ -26,6 +26,7 @@
     "mongodb": "^3.0.5",
     "nodemon": "^1.18.10",
     "pino": "^4.15.4",
+    "ramda": "^0.26.1",
     "throng": "^4.0.0",
     "uuid": "^3.2.1"
   },
@@ -43,6 +44,7 @@
     "@types/lodash": "^4.14.107",
     "@types/mongodb": "^3.0.9",
     "@types/pino": "^4.7.1",
+    "@types/ramda": "^0.26.9",
     "@types/throng": "^4.0.2",
     "@types/uuid": "^3.4.3",
     "ts-node": "^5.0.1",
