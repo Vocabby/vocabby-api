@@ -19,5 +19,6 @@ build:
 	copyup src/**/*.gql dist && \
 	tsc
 
+# heroku container:login
 deploy:
 	heroku container:push web
